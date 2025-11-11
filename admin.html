@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Painel Administrativo — Comunidade Jovens com Visão</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">🌍 <span class="logo-text">Comunidade Jovens com Visão</span></div>
+  </header>
+
+  <main class="container">
+    <h1>Painel Administrativo</h1>
+    <p class="intro">Visualize e exporte os membros cadastrados.</p>
+
+    <div class="admin-tools">
+      <input type="text" id="pesquisa" placeholder="🔍 Pesquisar por nome, e-mail ou código..." />
+      <div class="actions" style="margin-top:12px">
+        <button id="exportarJSON" class="btn">Exportar JSON</button>
+        <button id="exportarCSV" class="btn">Exportar CSV</button>
+        <button id="logoutBtn" class="btn link">Sair</button>
+      </div>
+    </div>
+
+    <table id="tabelaMembros" aria-live="polite">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nome</th>
+          <th>Idade</th>
+          <th>Gênero</th>
+          <th>Email</th>
+          <th>Telefone</th>
+          <th>Província</th>
+          <th>Ocupação</th>
+          <th>Área</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+
+  <script>
+    // Protege acesso: redireciona para login se não estiver logado
+    if (!sessionStorage.getItem('logado')) {
+      alert('❌ Acesso negado. Faça login primeiro.');
+      window.location.href = 'login.html';
+    }
+
+    const membros = JSON.parse(localStorage.getItem('membros')) || [];
+    const tabelaBody = document.querySelector('#tabelaMembros tbody');
+    const pesquisa = document.getElementById('pesquisa');
+
+    function preencherTabela(filtro = '') {
+      tabelaBody.innerHTML = '';
+      membros
+        .filter(m =>
+          (m.nome || '').toLowerCase().includes(filtro.toLowerCase()) ||
+          (m.email || '').toLowerCase().includes(filtro.toLowerCase()) ||
+          (m.codigo || '').toLowerCase().includes(filtro.toLowerCase())
+        )
+        .forEach(m => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${m.codigo}</td>
+            <td>${m.nome}</td>
+            <td>${m.idade}</td>
+            <td>${m.genero}</td>
+            <td>${m.email}</td>
+            <td>${m.telefone}</td>
+            <td>${m.provincia}</td>
+            <td>${m.ocupacao}</td>
+            <td>${m.area}</td>
+          `;
+          tabelaBody.appendChild(tr);
+        });
+    }
+
+    pesquisa.addEventListener('input', () => preencherTabela(pesquisa.value));
+    preencherTabela();
+
+    document.getElementById('exportarJSON').addEventListener('click', () => {
+      const blob = new Blob([JSON.stringify(membros, null, 2)], {type:'application/json'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'membros.json'; a.click();
+    });
+
+    document.getElementById('exportarCSV').addEventListener('click', () => {
+      const header = ['Código','Nome','Idade','Gênero','Email','Telefone','Província','Ocupação','Área'];
+      const rows = membros.map(m => [m.codigo,m.nome,m.idade,m.genero,m.email,m.telefone,m.provincia,m.ocupacao,m.area]);
+      const csv = [header.join(','), ...rows.map(r => r.map(v => '"' + String((v||'')).replace(/"/g,'""') + '"').join(','))].join('\n');
+      const blob = new Blob([csv], {type:'text/csv'}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'membros.csv'; a.click();
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      sessionStorage.removeItem('logado');
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>
