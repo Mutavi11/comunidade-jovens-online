@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comunidade Jovens com Visão — Cadastro</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">🌍 <span class="logo-text">Comunidade Jovens com Visão</span></div>
+  </header>
+
+  <main class="container">
+    <h1>Cadastre-se</h1>
+    <p class="intro">Bem-vindo(a)! Preencha o formulário para se cadastrar e receber seu código de membro por e-mail.</p>
+
+    <form id="cadastroForm" class="form">
+      <label>Nome completo
+        <input type="text" id="nome" required />
+      </label>
+
+      <div class="row">
+        <label>Idade
+          <input type="number" id="idade" required />
+        </label>
+
+        <label>Gênero
+          <select id="genero" required>
+            <option value="">Selecione...</option>
+            <option>Masculino</option>
+            <option>Feminino</option>
+            <option>Outro</option>
+          </select>
+        </label>
+
+        <label>E-mail
+          <input type="email" id="email" required />
+        </label>
+      </div>
+
+      <label>Telefone / WhatsApp
+        <input type="text" id="telefone" required />
+      </label>
+
+      <label>Província / Cidade
+        <input type="text" id="provincia" required />
+      </label>
+
+      <label>Ocupação
+        <input type="text" id="ocupacao" required />
+      </label>
+
+      <label>Área de interesse
+        <select id="area" required>
+          <option value="">Selecione...</option>
+          <option>Liderança</option>
+          <option>Empreendedorismo</option>
+          <option>Inovação</option>
+          <option>Saúde Mental</option>
+          <option>Cidadania</option>
+        </select>
+      </label>
+
+      <label>Breve motivação
+        <textarea id="motivacao" rows="3" required></textarea>
+      </label>
+
+      <div class="actions">
+        <button type="submit" class="btn primary">Cadastrar</button>
+        <a href="login.html" class="btn link">Painel Admin</a>
+      </div>
+    </form>
+
+    <div id="resultado" class="resultado" aria-live="polite"></div>
+
+    <footer class="help">Dica: se vais publicar online, substitua as chaves do EmailJS em <code>script.js</code>.</footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
