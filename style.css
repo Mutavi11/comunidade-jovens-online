@@ -1,0 +1,34 @@
+/* style.css — Comunidade Jovens com Visão */
+
+:root{
+  --blue:#004aad;
+  --bg:#f2f7ff;
+  --card:#ffffff;
+  --muted:#6b7280;
+}
+
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:var(--bg);color:#111}
+.site-header{background:linear-gradient(90deg,var(--blue),#2b6bd6);padding:14px 18px;color:#fff}
+.logo{font-weight:700;display:flex;align-items:center;gap:10px;font-size:18px}
+.logo-text{font-weight:700}
+.container{max-width:920px;margin:26px auto;padding:20px;background:var(--card);border-radius:12px;box-shadow:0 8px 30px rgba(12,32,63,0.08)}
+h1{color:var(--blue);margin:0 0 6px;font-size:22px}
+.intro{color:var(--muted);font-size:14px;margin-bottom:12px}
+.form label{display:block;margin-top:10px;color:var(--blue);font-weight:600}
+.form input,.form textarea,.form select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;margin-top:6px;font-size:14px}
+.row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.actions{display:flex;gap:10px;align-items:center;margin-top:12px}
+.btn{padding:10px 14px;border-radius:10px;border:0;cursor:pointer}
+.primary{background:var(--blue);color:#fff}
+.link{background:transparent;color:var(--blue);border:1px solid var(--blue);padding:10px 12px;border-radius:8px}
+.resultado{margin-top:18px;padding:12px;border-radius:8px;background:#eef6ff;color:var(--blue);font-weight:600}
+.help{margin-top:12px;color:var(--muted);font-size:13px}
+
+/* Admin table */
+#pesquisa{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;margin-bottom:10px}
+table{width:100%;border-collapse:collapse;margin-top:14px}
+th,td{border:1px solid #e6e9ef;padding:8px;text-align:left;vertical-align:top}
+th{background:var(--blue);color:#fff}
+.botoes{display:flex;gap:10px;margin-top:12px}
+@media(max-width:800px){.row{grid-template-columns:1fr}}

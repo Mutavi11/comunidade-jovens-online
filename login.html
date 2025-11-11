@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login Administrador — Comunidade Jovens com Visão</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">🌍 <span class="logo-text">Comunidade Jovens com Visão</span></div>
+  </header>
+
+  <main class="container">
+    <h1>Login Administrador</h1>
+    <p class="intro">Digite a senha para acessar o painel administrativo.</p>
+
+    <form id="loginForm" class="form">
+      <label>Senha
+        <input type="password" id="senha" placeholder="Senha do administrador" required>
+      </label>
+
+      <div class="actions">
+        <button type="submit" class="btn primary">Entrar</button>
+        <a href="index.html" class="btn link">Voltar</a>
+      </div>
+    </form>
+
+    <div id="mensagem" class="resultado" aria-live="polite"></div>
+  </main>
+
+  <script>
+    // Senha simples para proteger o painel (local). Em produção use servidor seguro.
+    const senhaCorreta = "JCV2025admin";
+
+    document.getElementById("loginForm").addEventListener("submit", function(event){
+      event.preventDefault();
+      const senha = document.getElementById("senha").value;
+      if (senha === senhaCorreta) {
+        sessionStorage.setItem('logado','true');
+        window.location.href = "admin.html";
+      } else {
+        document.getElementById("mensagem").innerText = "❌ Senha incorreta. Tente novamente!";
+      }
+    });
+  </script>
+</body>
+</html>
